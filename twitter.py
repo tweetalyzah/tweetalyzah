@@ -4,7 +4,8 @@ from flask import Flask
 from flask import g, session, request, url_for, flash
 from flask import redirect, render_template
 from flask_oauthlib.client import OAuth
-
+from email.utils import parsedate_tz, mktime_tz
+from datetime import datetime
 
 app = Flask(__name__)
 app.debug = True
@@ -22,6 +23,8 @@ twitter = oauth.remote_app(
     authorize_url='https://api.twitter.com/oauth/authenticate'
 )
 
+SECONDS_IN_DAY = 24 * 3600
+
 
 @twitter.tokengetter
 def get_twitter_token():
@@ -37,29 +40,36 @@ def before_request():
         g.user = session['twitter_oauth']
 
 
+def in_previous_24h(date_str):
+    return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str)) <= SECONDS_IN_DAY
+
+
+def get_recent_tweets():
+    friends = twitter.request('friends/ids.json').data
+    recent = []
+    for friend in friends['ids'][:3]:
+        timeline = twitter.request('statuses/user_timeline.json?user_id={}&count=200'.format(friend)).data
+        count = sum(1 for x in timeline if in_previous_24h(x['created_at']))
+        recent.append([str(friend),
+                       count+1, count+1
+                       ])
+    print(recent)
+    return recent
+
+
 @app.route('/')
 def index():
     tweets = None
+    recent = None
     if g.user is not None:
         resp = twitter.request('statuses/home_timeline.json')
-        friends = twitter.request('friends/ids.json').data
-        first_user = friends['ids'][0]
-        print(len(friends['ids']))
-        print(first_user)
 
-        friends_timeline = twitter.request('statuses/user_timeline.json?user_id={}'.format(first_user))
-        print(len(friends_timeline.data))
-
-
-        friends_timeline1 = twitter.request('statuses/user_timeline.json?user_id={}&max_id=870154025781661696'.format(first_user))
-        print(len(friends_timeline1.data))
-        print(friends_timeline1.data[0])
         if resp.status == 200:
             tweets = resp.data
         else:
             flash('Unable to load tweets from Twitter.')
-        # print(resp.data)
-    return render_template('index.html', tweets=tweets)
+        recent = get_recent_tweets()
+    return render_template('augmented_index.html', tweets=tweets, language_data=recent)
 
 
 @app.route('/tweet', methods=['POST'])
@@ -77,7 +87,7 @@ def tweet():
         flash("Error: #%d, %s " % (
             resp.data.get('errors')[0].get('code'),
             resp.data.get('errors')[0].get('message'))
-        )
+              )
     elif resp.status == 401:
         flash('Authorization error with Twitter.')
     else:
