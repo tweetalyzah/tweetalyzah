@@ -164,4 +164,3 @@ sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/")
 sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/tests")
 
 
-
