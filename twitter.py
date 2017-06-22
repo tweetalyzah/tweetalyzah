@@ -7,6 +7,7 @@ from flask_oauthlib.client import OAuth
 from email.utils import parsedate_tz, mktime_tz
 from datetime import datetime
 
+
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
@@ -25,6 +26,12 @@ twitter = oauth.remote_app(
 
 SECONDS_IN_DAY = 24 * 3600
 
+
+def create_app():
+    app = Flask(__name__)
+    app.debug = True
+    app.secret_key = 'development'
+    return app
 
 @twitter.tokengetter
 def get_twitter_token():
