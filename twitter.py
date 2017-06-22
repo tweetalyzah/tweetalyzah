@@ -1,5 +1,5 @@
 # coding: utf-8
-
+'''Main module. Contains OAuth token and functions generating tweets and statistics'''
 from flask import Flask
 from flask import g, session, request, url_for, flash
 from flask import redirect, render_template
@@ -41,17 +41,26 @@ def before_request():
 
 
 def in_previous_24h(date_str):
+    '''Function used to to check whether date represented by given string is within 24h period from current time
+
+    Args:
+        date_str: String with date. Preferred full date format e.g. <Fri Jun 19 12:25:37 +0000 2015>
+
+    Returns:
+        The boolean value. True for date within 24h, False otherwise.
+    '''
     return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str)) <= SECONDS_IN_DAY
 
 
 def get_recent_tweets():
+    '''Function used to get tweets posted by friends in last 24 hours'''
     friends = twitter.request('friends/ids.json').data
     recent = []
     for friend in friends['ids'][:3]:
         timeline = twitter.request('statuses/user_timeline.json?user_id={}&count=200'.format(friend)).data
         count = sum(1 for x in timeline if in_previous_24h(x['created_at']))
         recent.append([str(friend),
-                       count+1, count+1
+                       count + 1, count + 1
                        ])
     print(recent)
     return recent
@@ -59,6 +68,7 @@ def get_recent_tweets():
 
 @app.route('/')
 def index():
+    '''Function generating main page'''
     tweets = None
     recent = None
     if g.user is not None:
@@ -74,6 +84,7 @@ def index():
 
 @app.route('/tweet', methods=['POST'])
 def tweet():
+    '''Function used to post tweet passed in request data'''
     if g.user is None:
         return redirect(url_for('login', next=request.url))
     status = request.form['tweet']
@@ -97,12 +108,14 @@ def tweet():
 
 @app.route('/login')
 def login():
+    '''Function used to log into application'''
     callback_url = url_for('oauthorized', next=request.args.get('next'))
     return twitter.authorize(callback=callback_url or request.referrer or None)
 
 
 @app.route('/logout')
 def logout():
+    '''Function used to log out of application'''
     session.pop('twitter_oauth', None)
     return redirect(url_for('index'))
 
