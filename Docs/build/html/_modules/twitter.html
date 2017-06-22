@@ -70,18 +70,18 @@
 <span class="n">SECONDS_IN_DAY</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
 
 
-<span class="nd">@twitter</span><span class="o">.</span><span class="n">tokengetter</span>
+<div class="viewcode-block" id="get_twitter_token"><a class="viewcode-back" href="../index.html#twitter.get_twitter_token">[docs]</a><span class="nd">@twitter</span><span class="o">.</span><span class="n">tokengetter</span>
 <span class="k">def</span> <span class="nf">get_twitter_token</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;twitter_oauth&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
         <span class="n">resp</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;twitter_oauth&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;oauth_token&#39;</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;oauth_token_secret&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;oauth_token&#39;</span><span class="p">],</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;oauth_token_secret&#39;</span><span class="p">]</span></div>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
+<div class="viewcode-block" id="before_request"><a class="viewcode-back" href="../index.html#twitter.before_request">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
 <span class="k">def</span> <span class="nf">before_request</span><span class="p">():</span>
     <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="s1">&#39;twitter_oauth&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;twitter_oauth&#39;</span><span class="p">]</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;twitter_oauth&#39;</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="in_previous_24h"><a class="viewcode-back" href="../index.html#twitter.in_previous_24h">[docs]</a><span class="k">def</span> <span class="nf">in_previous_24h</span><span class="p">(</span><span class="n">date_str</span><span class="p">):</span>
@@ -164,14 +164,14 @@
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/oauthorized&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="oauthorized"><a class="viewcode-back" href="../index.html#twitter.oauthorized">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/oauthorized&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">oauthorized</span><span class="p">():</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">authorized_response</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">resp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;You denied the request to sign in.&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">session</span><span class="p">[</span><span class="s1">&#39;twitter_oauth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

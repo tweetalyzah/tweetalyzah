@@ -10,11 +10,21 @@ Welcome to TweetAlyzah's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+
+**Twitter** module
+=======================================
+
 .. automodule:: twitter
+   :members:
+   :undoc-members:
+
+
+**Test** module
+=======================================
+
 .. automodule:: test_sample
    :members:
-
-
+   :undoc-members:
 
 Indices and tables
 ==================

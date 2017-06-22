@@ -45,12 +45,81 @@
 <h1>Welcome to TweetAlyzah’s documentation!<a class="headerlink" href="#welcome-to-tweetalyzah-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-twitter"></span><p>Main module. Contains OAuth token and functions generating tweets and statistics</p>
-<span class="target" id="module-test_sample"></span><p>Some test text</p>
+</div>
+<div class="section" id="module-twitter">
+<span id="twitter-module"></span><h1><strong>Twitter</strong> module<a class="headerlink" href="#module-twitter" title="Permalink to this headline">¶</a></h1>
+<p>Main module. Contains OAuth token and functions generating tweets and statistics</p>
+<dl class="function">
+<dt id="twitter.before_request">
+<code class="descclassname">twitter.</code><code class="descname">before_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#before_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.before_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="twitter.get_recent_tweets">
+<code class="descclassname">twitter.</code><code class="descname">get_recent_tweets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_recent_tweets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_recent_tweets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to get tweets posted by friends in last 24 hours</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.get_twitter_token">
+<code class="descclassname">twitter.</code><code class="descname">get_twitter_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_twitter_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_twitter_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="twitter.in_previous_24h">
+<code class="descclassname">twitter.</code><code class="descname">in_previous_24h</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#in_previous_24h"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.in_previous_24h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to to check whether date represented by given string is within 24h period from current time</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>date_str: String with date. Preferred full date format e.g. &lt;Fri Jun 19 12:25:37 +0000 2015&gt;</dd>
+<dt>Returns:</dt>
+<dd>The boolean value. True for date within 24h, False otherwise.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.index">
+<code class="descclassname">twitter.</code><code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function generating main page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.login">
+<code class="descclassname">twitter.</code><code class="descname">login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to log into application</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.logout">
+<code class="descclassname">twitter.</code><code class="descname">logout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#logout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to log out of application</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.oauthorized">
+<code class="descclassname">twitter.</code><code class="descname">oauthorized</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#oauthorized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.oauthorized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="twitter.tweet">
+<code class="descclassname">twitter.</code><code class="descname">tweet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#tweet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to post tweet passed in request data</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-test_sample">
+<span id="test-module"></span><h1><strong>Test</strong> module<a class="headerlink" href="#module-test_sample" title="Permalink to this headline">¶</a></h1>
+<p>Simple test file to check whether tests go smooth</p>
 <dl class="function">
 <dt id="test_sample.func">
 <code class="descclassname">test_sample.</code><code class="descname">func</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/test_sample.html#func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_sample.func" title="Permalink to this definition">¶</a></dt>
-<dd><p>Some func text</p>
+<dd><p>Simple addition function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="test_sample.test_answer">
+<code class="descclassname">test_sample.</code><code class="descname">test_answer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/test_sample.html#test_answer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_sample.test_answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple test for addition function</p>
 </dd></dl>
 
 </div>
@@ -72,6 +141,8 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to TweetAlyzah’s documentation!</a></li>
+<li><a class="reference internal" href="#module-twitter"><strong>Twitter</strong> module</a></li>
+<li><a class="reference internal" href="#module-test_sample"><strong>Test</strong> module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 <div class="relations">
