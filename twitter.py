@@ -48,14 +48,17 @@ def before_request():
 
 
 def in_previous_24h(date_str):
-    return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str)) <= SECONDS_IN_DAY
+    return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str))\
+           <= SECONDS_IN_DAY
 
 
 def get_recent_tweets():
     friends = twitter.request('friends/ids.json').data
     recent = []
     for friend in friends['ids'][:3]:
-        timeline = twitter.request('statuses/user_timeline.json?user_id={}&count=200'.format(friend)).data
+        timeline = twitter.\
+            request('statuses/user_timeline.json?user_id={}&count=200'
+                    .format(friend)).data
         count = sum(1 for x in timeline if in_previous_24h(x['created_at']))
         recent.append([str(friend),
                        count+1, count+1
@@ -76,7 +79,8 @@ def index():
         else:
             flash('Unable to load tweets from Twitter.')
         recent = get_recent_tweets()
-    return render_template('augmented_index.html', tweets=tweets, language_data=recent)
+    return render_template('augmented_index.html',
+                           tweets=tweets, language_data=recent)
 
 
 @app.route('/tweet', methods=['POST'])
