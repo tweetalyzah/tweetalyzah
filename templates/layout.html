@@ -1,17 +1,17 @@
 <!doctype html>
 <head>
-<title>{% block title %}Welcome{% endblock %} | Flask OAuth Example</title>
+<title>{% block title %}Welcome{% endblock %} | TweetAlyzah</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static',
   filename='style.css') }}">
 </head>
 <body>
-<h1>Flask OAuth Example</h1>
+<h1>TweetAlyzah</h1>
 <ul class=navigation>
-  <li><a href="{{ url_for('index') }}">overview</a></li>
+  <li><a href="{{ url_for('index') }}">Overview</a></li>
   {% if g.user %}
-  <li><a href="{{ url_for('logout') }}">sign out [{{ g.user.screen_name}}]</a></li>
+  <li><a href="{{ url_for('logout') }}">Sign out [{{ g.user.screen_name}}]</a></li>
   {% else %}
-  <li><a href="{{ url_for('login') }}">sign in</a></li>
+  <li><a href="{{ url_for('login') }}">Sign in</a></li>
   {% endif %}
 </ul>
 {% for message in get_flashed_messages() %}

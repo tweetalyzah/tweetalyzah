@@ -7,6 +7,7 @@ from flask_oauthlib.client import OAuth
 from email.utils import parsedate_tz, mktime_tz
 from datetime import datetime
 
+
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
@@ -25,6 +26,12 @@ twitter = oauth.remote_app(
 
 SECONDS_IN_DAY = 24 * 3600
 
+
+def create_app():
+    app = Flask(__name__)
+    app.debug = True
+    app.secret_key = 'development'
+    return app
 
 @twitter.tokengetter
 def get_twitter_token():
@@ -49,7 +56,8 @@ def in_previous_24h(date_str):
     Returns:
         The boolean value. True for date within 24h, False otherwise.
     '''
-    return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str)) <= SECONDS_IN_DAY
+    return int(datetime.now().timestamp()) - mktime_tz(parsedate_tz(date_str))\
+           <= SECONDS_IN_DAY
 
 
 def get_recent_tweets():
@@ -57,7 +65,9 @@ def get_recent_tweets():
     friends = twitter.request('friends/ids.json').data
     recent = []
     for friend in friends['ids'][:3]:
-        timeline = twitter.request('statuses/user_timeline.json?user_id={}&count=200'.format(friend)).data
+        timeline = twitter.\
+            request('statuses/user_timeline.json?user_id={}&count=200'
+                    .format(friend)).data
         count = sum(1 for x in timeline if in_previous_24h(x['created_at']))
         recent.append([str(friend),
                        count + 1, count + 1
@@ -79,7 +89,8 @@ def index():
         else:
             flash('Unable to load tweets from Twitter.')
         recent = get_recent_tweets()
-    return render_template('augmented_index.html', tweets=tweets, language_data=recent)
+    return render_template('augmented_index.html',
+                           tweets=tweets, language_data=recent)
 
 
 @app.route('/tweet', methods=['POST'])

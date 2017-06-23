@@ -1,6 +1,13 @@
 language: python
 python:
-  - "2.7"
+  - "3.6"
 # command to install dependencies
 install: "pip install -r requirements.txt"
-script: pytest tests/test_sample.py
+
+script:
+- pytest tests/test_sample.py
+- pyflakes twitter.py tests/test_*.py
+- pep8 --statistics --count twitter.py tests/test_*.py
+
+matrix:
+  fast_finish: true
