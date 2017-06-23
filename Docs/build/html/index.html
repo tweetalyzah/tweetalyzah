@@ -48,10 +48,16 @@
 </div>
 <div class="section" id="module-twitter">
 <span id="twitter-module"></span><h1><strong>Twitter</strong> module<a class="headerlink" href="#module-twitter" title="Permalink to this headline">¶</a></h1>
-<p>Main module. Contains OAuth token and functions generating tweets and statistics</p>
+<p>Main module.
+Contains OAuth token and functions generating tweets and statistics</p>
 <dl class="function">
 <dt id="twitter.before_request">
 <code class="descclassname">twitter.</code><code class="descname">before_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#before_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.before_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="twitter.create_app">
+<code class="descclassname">twitter.</code><code class="descname">create_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#create_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.create_app" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -68,10 +74,15 @@
 <dl class="function">
 <dt id="twitter.in_previous_24h">
 <code class="descclassname">twitter.</code><code class="descname">in_previous_24h</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#in_previous_24h"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.in_previous_24h" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function used to to check whether date represented by given string is within 24h period from current time</p>
-<dl class="docutils">
+<dd><dl class="docutils">
+<dt>Function used to to check whether date represented by given string</dt>
+<dd>is within 24h period from current time</dd>
 <dt>Args:</dt>
-<dd>date_str: String with date. Preferred full date format e.g. &lt;Fri Jun 19 12:25:37 +0000 2015&gt;</dd>
+<dd><dl class="first last docutils">
+<dt>date_str: String with date. Preferred full date format</dt>
+<dd>e.g. &lt;Fri Jun 19 12:25:37 +0000 2015&gt;</dd>
+</dl>
+</dd>
 <dt>Returns:</dt>
 <dd>The boolean value. True for date within 24h, False otherwise.</dd>
 </dl>
