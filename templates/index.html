@@ -2,8 +2,9 @@
 {% block body %}
   <h2>Overview</h2>
   {% if g.user %}
+      <img src="https://twitter.com/{{ g.user.screen_name }}/profile_image?size=original">
     <p>
-      Hello <img src="https://twitter.com/{{ g.user.screen_name }}/profile_image">{{ g.user.screen_name }}!  Wanna tweet something?
+      Hello {{ g.user.screen_name }}!  Wanna tweet something?
     </p>
     <form action="{{ url_for('tweet') }}"  method=post>
       <p>
