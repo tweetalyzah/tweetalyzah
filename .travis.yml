@@ -5,7 +5,7 @@ python:
 install: "pip install -r requirements.txt"
 
 script:
-- pytest tests/test_sample.py
+- pytest tests/test_*.py
 - pyflakes twitter.py tests/test_*.py
 - pep8 --statistics --count twitter.py tests/test_*.py
 
