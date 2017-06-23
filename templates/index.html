@@ -2,6 +2,7 @@
 {% block body %}
   <h2>Overview</h2>
   {% if g.user %}
+      <img src="https://twitter.com/{{ g.user.screen_name }}/profile_image?size=original">
     <p>
       Hello {{ g.user.screen_name }}!  Wanna tweet something?
     </p>
@@ -16,7 +17,7 @@
     <ul>
     {% for tweet in tweets %}
       <li><a href="http://twitter.com/{{ tweet.user.screen_name
-        }}">{{ tweet.user.screen_name }}</a>: {{ tweet.text|urlize }}</li>
+        }}"><img src="https://twitter.com/{{ tweet.user.screen_name }}/profile_image">{{ tweet.user.screen_name }}</a>: {{ tweet.text|urlize }}</li>
     {% endfor %}
     </ul>
     {% endif %}
