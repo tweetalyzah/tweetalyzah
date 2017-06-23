@@ -1,4 +1,6 @@
 '''Simple test file to check whether tests go smooth'''
+
+
 def func(x):
     '''Simple addition function'''
     return x + 1

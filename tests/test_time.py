@@ -16,4 +16,3 @@ def test_hour_ago():
 @freeze_time("2015-06-19 12:25:37")
 def test_yesterday():
     assert not in_previous_24h("Thu Jun 18 10:25:36 +0000 2015")
-
