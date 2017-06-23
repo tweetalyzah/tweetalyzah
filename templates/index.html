@@ -5,6 +5,7 @@
     <p>
       Hello {{ g.user.screen_name }}!  Wanna tweet something?
     </p>
+      <img src="{{ g.user.profile_image_url_https }}">
     <form action="{{ url_for('tweet') }}"  method=post>
       <p>
         <input type=text name=tweet size=40>
