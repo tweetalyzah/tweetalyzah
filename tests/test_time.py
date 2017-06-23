@@ -1,5 +1,4 @@
 from freezegun import freeze_time
-from datetime import datetime
 from ..twitter import in_previous_24h
 
 
