@@ -1,6 +1,8 @@
 # coding: utf-8
-'''Main module.
-Contains OAuth token and functions generating tweets and statistics'''
+"""
+Main module.
+Contains OAuth token and functions generating tweets and statistics
+"""
 from flask import Flask
 from flask import g, session, request, url_for, flash
 from flask import redirect, render_template
@@ -49,7 +51,7 @@ def before_request():
 
 
 def in_previous_24h(date_str):
-    '''Function used to to check whether date represented by given string
+    """Function used to to check whether date represented by given string
      is within 24h period from current time
 
     Args:
@@ -58,7 +60,7 @@ def in_previous_24h(date_str):
 
     Returns:
         The boolean value. True for date within 24h, False otherwise.
-    '''
+    """
     return int(
         datetime.now().timestamp()) - mktime_tz(
         parsedate_tz(date_str)
@@ -83,7 +85,7 @@ def get_recent_tweets():
 
 @app.route('/')
 def index():
-    '''Function generating main page'''
+    """Function generating main page"""
     tweets = None
     recent = None
     if g.user is not None:
@@ -100,7 +102,7 @@ def index():
 
 @app.route('/tweet', methods=['POST'])
 def tweet():
-    '''Function used to post tweet passed in request data'''
+    """Function used to post tweet passed in request data"""
     if g.user is None:
         return redirect(url_for('login', next=request.url))
     status = request.form['tweet']
@@ -124,14 +126,14 @@ def tweet():
 
 @app.route('/login')
 def login():
-    '''Function used to log into application'''
+    """Function used to log into application"""
     callback_url = url_for('oauthorized', next=request.args.get('next'))
     return twitter.authorize(callback=callback_url or request.referrer or None)
 
 
 @app.route('/logout')
 def logout():
-    '''Function used to log out of application'''
+    """Function used to log out of application"""
     session.pop('twitter_oauth', None)
     return redirect(url_for('index'))
 
