@@ -3,6 +3,8 @@
 Main module.
 Contains OAuth token and functions generating tweets and statistics
 """
+from collections import defaultdict
+
 from flask import Flask
 from flask import g, session, request, url_for, flash
 from flask import redirect, render_template
@@ -68,7 +70,7 @@ def in_previous_24h(date_str):
 
 
 def get_recent_tweets():
-    '''Function used to get tweets posted by friends in last 24 hours'''
+    """Function used to get tweets posted by friends in last 24 hours"""
     friends = twitter.request('friends/ids.json').data
     recent = []
     for friend in friends['ids'][:3]:
@@ -83,11 +85,25 @@ def get_recent_tweets():
     return recent
 
 
+def get_languages():
+    """
+    TODO: Write docstring
+    """
+    friends = twitter.request('friends/list.json').data
+    languages = defaultdict(int)
+    for friend in friends['users']:
+        languages[friend['lang']] += 1
+    languages_list = [[lang, count, count] for lang, count in languages.items()]
+    print(languages_list)
+    return languages_list
+
+
+
 @app.route('/')
 def index():
     """Function generating main page"""
     tweets = None
-    recent = None
+    languages = None
     if g.user is not None:
         resp = twitter.request('statuses/home_timeline.json')
 
@@ -95,9 +111,9 @@ def index():
             tweets = resp.data
         else:
             flash('Unable to load tweets from Twitter.')
-        recent = get_recent_tweets()
+        languages = get_languages()
     return render_template('augmented_index.html',
-                           tweets=tweets, language_data=recent)
+                           tweets=tweets, language_data=languages)
 
 
 @app.route('/tweet', methods=['POST'])
