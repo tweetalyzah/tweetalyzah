@@ -93,10 +93,11 @@ def get_languages():
     languages = defaultdict(int)
     for friend in friends['users']:
         languages[friend['lang']] += 1
-    languages_list = [[lang, count, count] for lang, count in languages.items()]
+    languages_list = [
+        [lang, count, count] for lang, count in languages.items()
+    ]
     print(languages_list)
     return languages_list
-
 
 
 @app.route('/')
@@ -132,7 +133,7 @@ def tweet():
         flash("Error: #%d, %s " % (
             resp.data.get('errors')[0].get('code'),
             resp.data.get('errors')[0].get('message'))
-        )
+              )
     elif resp.status == 401:
         flash('Authorization error with Twitter.')
     else:
