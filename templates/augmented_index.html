@@ -10,14 +10,14 @@
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart(col1, col2, data, title, div_name) {
+      function drawChart(col1, col2, data_thing, title, div_name) {
           // Create the data table.
           var data = new google.visualization.DataTable();
 
           data.addColumn('string', col1);
           data.addColumn('number', col2);
           data.addColumn({type: 'number', role: 'tooltip'});
-          data.addRows({{ data | safe }});
+          data.addRows(data_thing);
           // Set chart options
           var options = {
               'title': title,
