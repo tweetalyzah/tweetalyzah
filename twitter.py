@@ -11,6 +11,7 @@ from flask import redirect, render_template
 from flask_oauthlib.client import OAuth
 from email.utils import parsedate_tz, mktime_tz
 from datetime import datetime
+from geopy.geocoders import  Nominatim
 
 app = Flask(__name__)
 app.debug = True
@@ -93,9 +94,21 @@ def get_languages():
     languages = defaultdict(int)
     for friend in friends['users']:
         languages[friend['lang']] += 1
-    languages_list = [[lang, count, count] for lang, count in languages.items()]
+    languages_list = [[lang, count, count]
+                      for lang, count in languages.items()]
     print(languages_list)
     return languages_list
+
+
+def get_places(tweets):
+    countries = defaultdict(int)
+    geolocator = Nominatim()
+    for tweet in tweets:
+        country  = geolocator.reverse(tweet.coordinates, language='en')
+        countries[country] += 1
+    countries_list = [[country, count, count]
+                      for country, count in countries.items()]
+    return countries_list
 
 
 
@@ -112,6 +125,7 @@ def index():
         else:
             flash('Unable to load tweets from Twitter.')
         languages = get_languages()
+        places = get_places(tweets)
     return render_template('augmented_index.html',
                            tweets=tweets, language_data=languages)
 

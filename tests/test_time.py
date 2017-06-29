@@ -28,4 +28,4 @@ def test_yesterday():
      works for dates from a day before current time'''
     assert not in_previous_24h("Thu Jun 18 08:25:36 +0000 2015")
     assert not in_previous_24h("Thu Jun 18 10:25:36 +0000 2015")
-    assert in_previous_24h("Thu Jun 18 10:25:37 +0000 2015")
+    assert not in_previous_24h("Thu Jun 18 10:25:37 +0000 2015")
