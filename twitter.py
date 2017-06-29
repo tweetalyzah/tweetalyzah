@@ -104,7 +104,7 @@ def get_places(tweets):
     countries = defaultdict(int)
     geolocator = Nominatim()
     for tweet in tweets:
-        country  = geolocator.reverse(tweet.coordinates, language='en')
+        country  = geolocator.reverse(tweet['coordinates'], language='en')
         countries[country] += 1
     countries_list = [[country, count, count]
                       for country, count in countries.items()]
