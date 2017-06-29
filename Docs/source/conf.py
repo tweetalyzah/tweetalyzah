@@ -30,7 +30,9 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+import os
 import sys
+import mock
 
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.doctest',
@@ -161,6 +163,13 @@ texinfo_documents = [
 ]
 
 sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/")
+sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/twitter.py")
 sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/tests")
+sys.path.insert(0, os.path.abspath('...'))
+
+
+autodoc_mock_imports = ["twitter", "..twitter", "in_previous_24h"]
+
+
 
 
