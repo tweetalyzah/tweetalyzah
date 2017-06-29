@@ -116,7 +116,8 @@ def get_countries(tweets):
             countries[single_tweet['place']['country']] += 1
         else:
             if single_tweet['coordinates'] is not None:
-                country = geolocator.reverse(single_tweet['coordinates'].coordinates, language='en')
+                country = geolocator.reverse(single_tweet['coordinates']
+                                             .coordinates, language='en')
                 countries[country] += 1
     countries_list = [[country, count, count]
                       for country, count in countries.items()]
