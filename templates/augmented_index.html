@@ -5,8 +5,8 @@
       <script type="text/javascript">// Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart']});
       // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart('Languages', 'Usage', {{ language_data | safe }}, 'Most used languages on Twitter: All Tweets','chart_div'));
-      google.setOnLoadCallback(drawChart('Countries', 'Usage', {{ countries_data | safe }}, 'Places marked on your timeline','countries_div'));
+      google.setOnLoadCallback(function(){drawChart('Languages', 'Usage', {{ language_data | safe }}, 'Most used languages on Twitter: All Tweets','chart_div');});
+      google.setOnLoadCallback(function(){drawChart('Countries', 'Usage', {{ countries_data | safe }}, 'Places marked on your timeline','countries_div');});
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
