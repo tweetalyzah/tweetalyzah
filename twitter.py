@@ -130,6 +130,7 @@ def index():
     """Function generating main page"""
     tweets = None
     languages = None
+    countries = None
     if g.user is not None:
         resp = twitter.request('statuses/home_timeline.json')
 
@@ -142,7 +143,7 @@ def index():
     return render_template('augmented_index.html',
                            tweets=tweets,
                            language_data=languages,
-                           countries_data=countries,)
+                           countries_data=countries)
 
 
 @app.route('/tweet', methods=['POST'])
