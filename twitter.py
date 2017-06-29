@@ -11,7 +11,7 @@ from flask import redirect, render_template
 from flask_oauthlib.client import OAuth
 from email.utils import parsedate_tz, mktime_tz
 from datetime import datetime
-from geopy.geocoders import  Nominatim
+from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
 app.debug = True
@@ -57,11 +57,11 @@ def in_previous_24h(date_str):
     """Function used to to check whether date represented by given string
      is within 24h period from current time
 
-    Args:
+    :param date_str:
         date_str: String with date. Preferred full date format
          e.g. <Fri Jun 19 12:25:37 +0000 2015>
 
-    Returns:
+    :return:
         The boolean value. True for date within 24h, False otherwise.
     """
     return int(
@@ -88,7 +88,9 @@ def get_recent_tweets():
 
 def get_languages():
     """
-    TODO: Write docstring
+    Function used to get list of languages used by friends.
+    Friends' languages are derived from twitter 'lang' parameter
+    Return format is ready to be used by Google Visualization API.
     """
     friends = twitter.request('friends/list.json').data
     languages = defaultdict(int)
@@ -100,18 +102,25 @@ def get_languages():
     return languages_list
 
 
-def get_places(tweets):
+def get_countries(tweets):
+    """
+    Function used to get list of countries from which given tweets orginate.
+    Countries are derived either from a 'place' parameter or by checking
+    tweet's coordinates with geopy.
+    Return format is ready to be used by Google Visualization API.
+    """
     countries = defaultdict(int)
     geolocator = Nominatim()
-    for tweet in tweets:
-        print(tweet['coordinates'])
-        print(tweet)
-        country  = geolocator.reverse(tweet['coordinates'].coordinates, language='en')
-        countries[country] += 1
+    for single_tweet in tweets:
+        if single_tweet['place'] is not None:
+            countries[single_tweet['place']['country']] += 1
+        else:
+            if single_tweet['coordinates'] is not None:
+                country = geolocator.reverse(single_tweet['coordinates'].coordinates, language='en')
+                countries[country] += 1
     countries_list = [[country, count, count]
                       for country, count in countries.items()]
     return countries_list
-
 
 
 @app.route('/')
@@ -127,7 +136,7 @@ def index():
         else:
             flash('Unable to load tweets from Twitter.')
         languages = get_languages()
-        places = get_places(tweets)
+        countries = get_countries(tweets)
     return render_template('augmented_index.html',
                            tweets=tweets, language_data=languages)
 
@@ -148,7 +157,7 @@ def tweet():
         flash("Error: #%d, %s " % (
             resp.data.get('errors')[0].get('code'),
             resp.data.get('errors')[0].get('message'))
-        )
+              )
     elif resp.status == 401:
         flash('Authorization error with Twitter.')
     else:
