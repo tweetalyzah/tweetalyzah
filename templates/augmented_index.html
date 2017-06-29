@@ -6,6 +6,7 @@
       google.load('visualization', '1.0', {'packages':['corechart']});
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart);
+      google.setOnLoadCallback(drawCountryChart);
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
@@ -50,10 +51,36 @@
         // ------------------------------------------------------------------//
         // ------------------------------------------------------------------//
       }
+      function drawCountryChart() {
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('string', 'Languages');
+          data.addColumn('number', 'Usage');
+          data.addColumn({type: 'number', role: 'tooltip'});
+          data.addRows({{ countries_data | safe }});
+          // Set chart options
+          var options = {
+              'title': 'Most used languages on Twitter: All Tweets',
+              'width': 800,
+              'height': 600,
+              sliceVisibilityThreshold: .01,
+              is3D: true
+          };
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById('country_chart_div'));
+          {#        console.log(data);#}
+          chart.draw(data, options);
+      }
     </script>
 {% endblock %}
 {% block div %}
 <b>Most used languages on Twitter: All Tweets</b>
     <div id="chart_div"></div>
+{#    <div id="chart_div2"></div>#}
+{% endblock %}
+{% block country_div %}
+<b>Places from your timeline</b>
+    <div id="country_chart_div"></div>
 {#    <div id="chart_div2"></div>#}
 {% endblock %}

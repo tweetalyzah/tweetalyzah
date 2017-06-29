@@ -120,6 +120,7 @@ def get_countries(tweets):
                 countries[country] += 1
     countries_list = [[country, count, count]
                       for country, count in countries.items()]
+    print(countries_list)
     return countries_list
 
 
@@ -138,7 +139,9 @@ def index():
         languages = get_languages()
         countries = get_countries(tweets)
     return render_template('augmented_index.html',
-                           tweets=tweets, language_data=languages)
+                           tweets=tweets,
+                           language_data=languages,
+                           countries_data=countries,)
 
 
 @app.route('/tweet', methods=['POST'])
