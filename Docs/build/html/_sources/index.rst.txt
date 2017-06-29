@@ -19,10 +19,14 @@ Welcome to TweetAlyzah's documentation!
    :undoc-members:
 
 
-**Test** module
+**Test** modules
 =======================================
 
 .. automodule:: test_sample
+   :members:
+   :undoc-members:
+
+.. automodule:: test_time
    :members:
    :undoc-members:
 
