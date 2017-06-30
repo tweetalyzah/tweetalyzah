@@ -138,7 +138,10 @@ def index():
             tweets = resp.data
         else:
             flash('Unable to load tweets from Twitter.')
-        languages = get_languages()
+        try:
+            languages = get_languages()
+        except KeyError:
+            pass
         countries = get_countries(tweets)
     return render_template('augmented_index.html',
                            tweets=tweets,
