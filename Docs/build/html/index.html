@@ -61,6 +61,31 @@ Contains OAuth token and functions generating tweets and statistics</p>
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="twitter.get_countries">
+<code class="descclassname">twitter.</code><code class="descname">get_countries</code><span class="sig-paren">(</span><em>tweets</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_countries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_countries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to get list of countries from which given tweets orginate.
+Countries are derived either from a ‘place’ parameter or by checking
+tweet’s coordinates with geopy.
+Return format is ready to be used by Google Visualization API.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.get_hashtags">
+<code class="descclassname">twitter.</code><code class="descname">get_hashtags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_hashtags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_hashtags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to get list of most popular hashtags/trends
+with popularity associated with each hashtag.
+Collection is sorted by popularity.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter.get_languages">
+<code class="descclassname">twitter.</code><code class="descname">get_languages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_languages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_languages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to get list of languages used by friends.
+Friends’ languages are derived from twitter ‘lang’ parameter
+Return format is ready to be used by Google Visualization API.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="twitter.get_recent_tweets">
 <code class="descclassname">twitter.</code><code class="descname">get_recent_tweets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter.html#get_recent_tweets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter.get_recent_tweets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function used to get tweets posted by friends in last 24 hours</p>
@@ -77,15 +102,21 @@ Contains OAuth token and functions generating tweets and statistics</p>
 <dd><dl class="docutils">
 <dt>Function used to to check whether date represented by given string</dt>
 <dd>is within 24h period from current time</dd>
-<dt>Args:</dt>
-<dd><dl class="first last docutils">
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> – <dl class="docutils">
 <dt>date_str: String with date. Preferred full date format</dt>
 <dd>e.g. &lt;Fri Jun 19 12:25:37 +0000 2015&gt;</dd>
 </dl>
-</dd>
-<dt>Returns:</dt>
-<dd>The boolean value. True for date within 24h, False otherwise.</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The boolean value. True for date within 24h, False otherwise.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">

@@ -166,7 +166,8 @@ sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/")
 sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/twitter.py")
 sys.path.insert(0,"/Users/jakubtustanowski/Desktop/Studia/tweetalyzah/tests")
 sys.path.insert(0, os.path.abspath('...'))
-
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('.../tests'))
 
 autodoc_mock_imports = ["twitter", "..twitter", "in_previous_24h"]
 
