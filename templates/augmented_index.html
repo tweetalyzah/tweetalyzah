@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 {% block graphs %}
       <!--Load the AJAX API-->
+    <link rel="stylesheet" href="../static/style.css">
       <script type="text/javascript" src="https://www.google.com/jsapi"></script>
       <script type="text/javascript">// Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart']});
@@ -21,8 +22,8 @@
           // Set chart options
           var options = {
               'title': title,
-              'width': 800,
-              'height': 600,
+              'width': 500,
+              'height': 500,
               sliceVisibilityThreshold: .01,
               is3D: true
           };

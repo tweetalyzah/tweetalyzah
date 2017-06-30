@@ -4,8 +4,9 @@
 <link rel=stylesheet type=text/css href="{{ url_for('static',
   filename='style.css') }}">
 </head>
+<link rel="stylesheet" href="./static/style.css">
 <body>
-<h1>TweetAlyzah</h1>
+<h1 class="main-title">TweetAlyzah</h1>
 <ul class=navigation>
   <li><a href="{{ url_for('index') }}">Overview</a></li>
   {% if g.user %}

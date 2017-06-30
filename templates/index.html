@@ -1,39 +1,58 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Overview</h2>
-  {% if g.user %}
-      <img src="https://twitter.com/{{ g.user.screen_name }}/profile_image?size=original">
-    <p>
-      Hello {{ g.user.screen_name }}!  Wanna tweet something?
-    </p>
-    <form action="{{ url_for('tweet') }}"  method=post>
-      <p>
-        <input type=text name=tweet size=40>
-        <input type=submit value="Tweet!">
-      </p>
-    </form>
-    {% if tweets %}
-    <h3>Your Timeline</h3>
-    <ul>
-    {% for tweet in tweets %}
-      <li><a href="http://twitter.com/{{ tweet.user.screen_name
-        }}"><img src="https://twitter.com/{{ tweet.user.screen_name }}/profile_image">{{ tweet.user.screen_name }}</a>: {{ tweet.text|urlize }}</li>
-    {% endfor %}
-    </ul>
+    <h2>Overview</h2>
+    {% if g.user %}
+        <div class="user-overview">
+            <div class="user-image-wrapper">
+                <img src="https://twitter.com/{{ g.user.screen_name }}/profile_image?size=original">
+            </div>
+            <div class="user-new-tweet">
+            <p>
+                Hello {{ g.user.screen_name }}! Wanna tweet something?
+            </p>
+            <form action="{{ url_for('tweet') }}" method=post>
+                <p>
+                    <input type=text name=tweet size=40>
+                    <input type=submit value="Tweet!">
+                </p>
+            </form>
+            </div>
+        </div>
+
+
+        {% if tweets %}
+            <h3>Your Timeline</h3>
+            <ul class="main-tweets-list">
+                {% for tweet in tweets %}
+                    <li>
+                        <div class="user-profile">
+                            <a href="http://twitter.com/{{ tweet.user.screen_name }}">
+                                <img src="https://twitter.com/{{ tweet.user.screen_name }}/profile_image">
+                                <div>{{ tweet.user.screen_name }}</div>
+                            </a>
+                        </div>
+                        <div>
+                            : {{ tweet.text|urlize }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% block graphs %}
+        {% endblock %}
+        {% block div %}
+        {% endblock %}
+        {% block country_div %}
+        {% endblock %}
+    {% else %}
+        <p>
+            Sign in to view your public timeline and to tweet from this
+            application.
+        </p>
+        <p>
+            <a href="{{ url_for('login') }}"><img
+                    src="{{ url_for('static', filename='sign-in.png') }}"
+                    alt="sign in"></a>
+        </p>
     {% endif %}
-      {% block graphs %}
-      {% endblock %}
-      {% block div %}
-      {% endblock %}
-      {% block country_div %}
-      {% endblock %}
-  {% else %}
-    <p>
-      Sign in to view your public timeline and to tweet from this application.
-    </p>
-    <p>
-      <a href="{{ url_for('login') }}"><img src="{{
-        url_for('static', filename='sign-in.png') }}" alt="sign in"></a>
-    </p>
-  {% endif %}
 {% endblock %}

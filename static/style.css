@@ -1,5 +1,10 @@
+@font-face {
+    font-family: lato;
+    src: url(./Lato-Regular.ttf)
+}
+
 body {
-    font-family: 'Georgia', serif;
+    font-family: lato, serif;
     font-size: 16px;
     margin: 30px;
     padding: 0;
@@ -26,7 +31,6 @@ p.error {
 }
 
 input {
-    font-family: 'Georgia', serif;
     font-size: 16px;
     border: 1px solid black;
     color: #335E79;
@@ -46,4 +50,86 @@ input[name="openid"] {
 
 h1, h2 {
     font-weight: normal;
+}
+
+.navigation {
+    list-style: none;
+}
+
+.main-tweets-list {
+    list-style: none;
+    padding: 0;
+}
+
+.main-tweets-list > li {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    background: #f8f8f8;
+    box-shadow: 0 0 5px 1px #b0b0b0;
+    transition: .3s;
+}
+
+.main-tweets-list li:hover {
+    background: #ffffff;
+}
+
+.main-tweets-list div:nth-child(1) {
+    flex: 1;
+    overflow: hidden;
+}
+
+.main-tweets-list div:nth-child(2) {
+    flex: 5;
+}
+
+.main-tweets-list li img {
+    margin-right: 10px;
+
+}
+
+.user-profile {
+    text-align: center;
+}
+
+.user-profile a {
+    text-decoration: none;
+    color: #147b8d;
+    text-transform: uppercase;
+}
+
+.main-title {
+}
+
+.navigation {
+    text-align: right;
+}
+
+.user-overview {
+    display: flex;
+}
+
+.user-image-wrapper {
+    flex: 3;
+    margin-right: 20px;
+}
+
+.user-new-tweet {
+    flex: 6;
+}
+
+.user-overview img{
+    width: 100%;
+}
+
+
+#chart_div {
+    margin: 30px auto;
+    box-shadow: 0 0 5px 1px #979797;
+}
+
+#country_chart_div {
+    margin: 30px auto;
+    box-shadow: 0 0 5px 1px #979797;
 }
