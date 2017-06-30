@@ -125,28 +125,47 @@ def get_countries(tweets):
     return countries_list
 
 
+def get_hashtags():
+    """
+    Function used to get list of most popular hashtags/trends
+    with popularity associated with each hashtag.
+    Collection is sorted by popularity.
+    """
+    trends = twitter.request('trends/place.json?id=1').data
+    trends_list = [[x['name'], int(x['tweet_volume'])]
+                   for x in trends[0]['trends']
+                   if isinstance(x['tweet_volume'], int)]
+    trends_list = sorted(trends_list, key=lambda x: x[1], reverse=True)
+    return list(trends_list)
+
+
 @app.route('/')
 def index():
     """Function generating main page"""
     tweets = None
     languages = None
     countries = None
+    trends = None
     if g.user is not None:
         resp = twitter.request('statuses/home_timeline.json')
 
         if resp.status == 200:
             tweets = resp.data
+            countries = get_countries(tweets)
         else:
             flash('Unable to load tweets from Twitter.')
         try:
             languages = get_languages()
+            trends = get_hashtags()
+            print(trends)
         except KeyError:
             pass
-        countries = get_countries(tweets)
+            # print(tweets)
     return render_template('augmented_index.html',
                            tweets=tweets,
                            language_data=languages,
-                           countries_data=countries)
+                           countries_data=countries,
+                           hashtags_data=trends)
 
 
 @app.route('/tweet', methods=['POST'])
@@ -165,7 +184,7 @@ def tweet():
         flash("Error: #%d, %s " % (
             resp.data.get('errors')[0].get('code'),
             resp.data.get('errors')[0].get('message'))
-        )
+              )
     elif resp.status == 401:
         flash('Authorization error with Twitter.')
     else:
